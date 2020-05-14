@@ -1,0 +1,215 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Gegenereerd op: 07 apr 2020 om 22:31
+-- Serverversie: 10.4.10-MariaDB
+-- PHP-versie: 7.3.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `webshop`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(1) NOT NULL AUTO_INCREMENT,
+  `username` varchar(10) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(1, 'admin', '827ccb0eea8a706c4c34a16891f84e7b');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(99) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `description` text NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `category`
+--
+
+INSERT INTO `category` (`id`, `name`, `description`, `active`) VALUES
+(1, 'tafellamp', 'Tafellampen zijn binnenlampen voor op tafel.', 1),
+(2, 'buitenlamp', 'Buitenlampen zijn lampen voor buitens huis.', 1),
+(3, 'designlamp', 'designlampen zijn binnenlampen voor ontwerp.', 1),
+(4, 'bureaulamp', 'bureaulampen zijn binnenlampen voor aan het bureau.', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `coustomers`
+--
+
+DROP TABLE IF EXISTS `coustomers`;
+CREATE TABLE IF NOT EXISTS `coustomers` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `gender` varchar(6) NOT NULL,
+  `firstName` varchar(10) NOT NULL,
+  `middleName` varchar(25) NOT NULL,
+  `lastName` varchar(25) NOT NULL,
+  `street` varchar(15) NOT NULL,
+  `houseNumber` int(4) NOT NULL,
+  `houseNumber_addon` varchar(4) NOT NULL,
+  `zipCode` int(4) NOT NULL,
+  `city` varchar(15) NOT NULL,
+  `phone` int(3) NOT NULL,
+  `e-mailadres` varchar(25) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `newsletter_subscription` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `e-mailadres` (`e-mailadres`),
+  UNIQUE KEY `phone` (`phone`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `coustomers`
+--
+
+INSERT INTO `coustomers` (`id`, `gender`, `firstName`, `middleName`, `lastName`, `street`, `houseNumber`, `houseNumber_addon`, `zipCode`, `city`, `phone`, `e-mailadres`, `password`, `newsletter_subscription`) VALUES
+(1, 'Male', 'Pablo', 'julio', 'El Soriano', 'osdorp', 68, 'b', 1078, 'Amsterdam', 657886431, 'p.ElSoriano@hotmail.com', 'peanut1', 'hi'),
+(2, 'Female', 'Julia', '', 'El Soriano', 'osdorp', 68, 'b', 1078, 'Amsterdam', 689167328, 'Julialove@hotmail.com', 'peanut2', 'hi'),
+(3, 'Male', 'Tom', '', 'wessink', 'marnixstraat', 103, '', 1015, 'Amsterdam', 699647833, 'TWessink@hotmail.com', 'peanut3', 'hi'),
+(4, 'Female', 'Tori', '', 'Delgado', 'visserstraat', 3, '', 5612, 'Eindhoven', 667855634, 'Torilori@hotmail.com', 'peanut4', 'hi'),
+(5, 'Female', 'marie', '', 'wilson', 'amstelveenseweg', 688, '', 1081, 'Amsterdam', 635776931, 'Marie.w@hotmail.com', 'peanut5', 'hi');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE IF NOT EXISTS `product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `description` text NOT NULL,
+  `category id` int(11) NOT NULL,
+  `price` decimal(5,2) NOT NULL,
+  `color` varchar(25) NOT NULL,
+  `weight` int(10) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `product`
+--
+
+INSERT INTO `product` (`id`, `name`, `description`, `category id`, `price`, `color`, `weight`, `active`) VALUES
+(1, 'Arstid', 'De lampenkap van textiel geeft een zacht en decoratief licht.\r\n<br><br>\r\nLichtbron wordt apart verkocht. IKEA adviseert de led-lamp E27 globevorm opaalwit.\r\n<br><b>\r\nGebruik een opalen lichtbron als je een gewone lampenkap of lamp hebt en je een gelijkmatig, gespreid licht wilt.\r\n<br><br>\r\nVoorzien van trekschakelaar.\r\n<br><br>\r\nDit product is CE-gecertificeerd.\r\n\r\nGoed te completeren met andere lampen uit dezelfde serie.', 1, '39.95', 'wit', 300, 1),
+(2, 'buitenlamp', 'Lamp dat geschickt is voor buitenshuis', 2, '47.95', 'oranje', 325, 1),
+(3, 'gans-lamp', 'Lamp dat een ganzenfiguur heeft', 3, '29.95', 'wit/geel', 250, 1),
+(4, 'giraf', 'Lamp dat een Giraf lijkt.', 3, '27.95', 'geel/zwart', 300, 1),
+(5, 'hektar', 'hektar is en lamp speciaal gemaakt voor slaapkamer', 4, '19.95', 'grijs', 150, 1),
+(6, 'jesse', 'lamp voor in de woonkamer', 1, '19.95', 'zwart', 300, 1),
+(7, 'lampje', 'Lampje is ook gezien als een hangende lamp dat boven op je plafond hangt', 3, '9.95', 'zwart', 100, 1),
+(8, 'llhara', 'lamp perfect voor bij je bureau midden in de nacht', 4, '14.95', 'zwart', 150, 1),
+(9, 'struisvogel-lamp', 'een lamp dat wordt gedragen door een Struisvogel-figuur', 3, '19.95', 'groen', 200, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `product_image`
+--
+
+DROP TABLE IF EXISTS `product_image`;
+CREATE TABLE IF NOT EXISTS `product_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `product_image`
+--
+
+INSERT INTO `product_image` (`id`, `product_id`, `image`, `active`) VALUES
+(1, 1, 'arstid.jpg', 1),
+(2, 2, 'buitenlamp.jpg', 1),
+(3, 2, 'buitenlamp2.jpg', 1),
+(4, 3, 'gans.jpg', 1),
+(5, 3, 'giraf.jpg', 1),
+(6, 3, 'giraf2.jpg', 1),
+(7, 4, 'hektar.jpg', 1),
+(8, 1, 'jesse.jpg', 1),
+(9, 3, 'lampje.jpg', 1),
+(10, 4, 'llhara.jpg', 1),
+(11, 3, 'struisvogel.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(1) NOT NULL AUTO_INCREMENT,
+  `FirstName` varchar(10) NOT NULL,
+  `MidleName` varchar(25) NOT NULL,
+  `LastName` varchar(25) NOT NULL,
+  `BirthDate` date NOT NULL,
+  `E-maildress` varchar(30) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `E-maildress` (`E-maildress`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `user`
+--
+
+INSERT INTO `user` (`id`, `FirstName`, `MidleName`, `LastName`, `BirthDate`, `E-maildress`, `password`) VALUES
+(1, 'sam', 'opoku', 'Boahemaa', '1997-07-02', 'samiobb@hotmail.com', '8f1f7aaf3e931f2b42af99f6720c27b4'),
+(2, 'Jan', 'Van', 'Os', '1982-04-17', '', '827ccb0eea8a706c4c34a16891f84e7b');
+
+--
+-- Indexen voor geëxporteerde tabellen
+--
+
+--
+-- Indexen voor tabel `coustomers`
+--
+ALTER TABLE `coustomers` ADD FULLTEXT KEY `password` (`password`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
